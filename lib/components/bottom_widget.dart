@@ -6,7 +6,7 @@ import 'package:flutter_pipixia/manager/home_screen.dart';
 import 'package:flutter_pipixia/manager/user_screen.dart';
 import 'package:flutter_pipixia/manager/info.dart';
 import 'package:flutter_pipixia/components/animation_route.dart';
-import 'package:flutter_pipixia/global/util.dart';
+import 'package:flutter_pipixia/global/util_toast.dart';
 
 /*
  * 主界面底部导航栏
@@ -42,27 +42,35 @@ import 'package:flutter_pipixia/global/util.dart';
    Widget build(BuildContext context) {
      return Scaffold(
        body: list[_currentIndex],//默认显示的内容
-       floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.white,
-          tooltip: '常回家看看',//长按提示 #fc49ae
-          onPressed: (){
-            // 中间加号的点击事件 
-            //  Navigator.of(context).push(AnimationRoute(InfoPage()));
+      //  floatingActionButton: FloatingActionButton(
+      //     child: Icon( Icons.add, color: ThemeStyle.iconButton ),
+      //     backgroundColor: Colors.white,
+      //     foregroundColor: Colors.red, //前景色影响文字
+      //     elevation: 1, 
+      //     mini: true, //变小 
+      //     tooltip: '常回家看看',//长按提示 #fc49ae
+      //     onPressed: (){
+      //       // 中间加号的点击事件 
+      //       //  Navigator.of(context).push(AnimationRoute(InfoPage()));
 
-            //  Navigator.of(context).push(MaterialPageRoute(builder:(BuildContext context){
-            //             return InfoPage(title:'s');
-            //           })); 
-            //  _showSimpleDialog(context);
+      //       //  Navigator.of(context).push(MaterialPageRoute(builder:(BuildContext context){
+      //       //             return InfoPage(title:'s');
+      //       //           })); 
+      //       //  _showSimpleDialog(context);
 
-             ToastView.show(context,'杀人不眨眼，吃人不撒盐');
-
-          },
-          child: Icon( Icons.add, color: ThemeStyle.iconButton ),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,//居中浮动显示
+      //        ToastView.show( 
+      //           context:context,
+      //           message:'我是小妖怪，逍遥又自在，杀人不眨眼，吃人不撒盐',
+      //           backgroundColor:Colors.red
+      //          );
+ 
+      //     },
+         
+      //   ),
+        // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,//居中浮动显示
 
         // bottomNavigationBar: _bottomNavigationBar()//使用规则导航
-        bottomNavigationBar: _bottomAppBar()//使用不规则导航
+        bottomNavigationBar: _bottomAppBar(context)//使用不规则导航
         
        
      );
@@ -73,7 +81,7 @@ import 'package:flutter_pipixia/global/util.dart';
 
 /*
  *  规则的底部导航栏
- * 
+ *  按钮数量必须跟路由中页面数量一致否则出现异常
  * */
 
   Widget _bottomNavigationBar(){
@@ -86,7 +94,8 @@ import 'package:flutter_pipixia/global/util.dart';
               ),
               BottomNavigationBarItem(
                 icon: Icon( Icons.account_box, color: _BottomAppBarColor),
-                title: Text( '用户', style: TextStyle(color: _BottomAppBarColor) ) 
+                title: Text( '用户', style: TextStyle(color: _BottomAppBarColor) ) ,
+                // activeIcon: Center() //选中后的图标
               ),
           ],
           currentIndex: _currentIndex,
@@ -95,7 +104,8 @@ import 'package:flutter_pipixia/global/util.dart';
               _currentIndex = index;
             });
           },
-          type:BottomNavigationBarType.fixed // 悬浮
+          iconSize: 20.0,
+          type:BottomNavigationBarType.shifting // fixed  shifting 
         );
  }
 
@@ -103,7 +113,7 @@ import 'package:flutter_pipixia/global/util.dart';
  *  不规则的底部导航栏
  * 
  * */
- Widget _bottomAppBar(){
+ Widget _bottomAppBar(BuildContext context){
    //底部工具栏 更灵活
    return BottomAppBar(
           color: Colors.white, //底部工具栏的颜色。
@@ -122,6 +132,22 @@ import 'package:flutter_pipixia/global/util.dart';
                   });
                }
               ),
+              IconButton(
+               icon:Icon(Icons.add),
+               color: ThemeStyle.iconButton,
+               onPressed:(){
+
+                ToastView.show( 
+                  context:context,
+                  message:'我是小妖怪，逍遥又自在，杀人不眨眼，吃人不撒盐',
+                  backgroundColor:Colors.red
+                );
+                Navigator.of(context).push(AnimationRoute(InfoPage(title:'进入新页面'),'scale'));
+
+                // _showSimpleDialog(context);
+
+               }
+               ),
                IconButton(
                icon:Icon(Icons.account_box),
                color: ThemeStyle.iconButton,

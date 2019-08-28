@@ -25,7 +25,10 @@ class _InfoPageState extends State<InfoPage> {
 
   @override
   Widget build(BuildContext context) { 
-    return Scaffold( 
+    return Scaffold(
+      appBar: AppBar( 
+        title: Text(widget.title),
+      ), 
       body: Center(  
         child: Column( 
           mainAxisAlignment: MainAxisAlignment.center,

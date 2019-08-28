@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_pipixia/components/splash_screen.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart'; 
+// import 'package:flutter_screenutil/flutter_screenutil.dart'; 
+import 'package:catcher/catcher_plugin.dart';
 
 /*
  * APP 主入口文件
@@ -8,7 +9,21 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
  * 
  * */
 
-void main() => runApp(MyApp());
+// void main() => runApp(MyApp());
+
+void main() {
+
+  CatcherOptions debugOptions = CatcherOptions(DialogReportMode(), [ConsoleHandler()]);
+
+  // CatcherOptions releaseOptions = CatcherOptions(DialogReportMode(), [
+  //   EmailManualHandler(["625672881@qq.com"])
+  // ]);
+
+  Catcher(MyApp(), debugConfig: debugOptions);
+
+  // runApp(MyApp());
+
+} 
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.

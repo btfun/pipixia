@@ -19,6 +19,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
 
   void initState() { 
     super.initState();
+    //vsync 垂直同步设置 需要 混入 with SingleTickerProviderStateMixin
     _controller = AnimationController(vsync:this,duration:Duration(milliseconds:1500));
     _animation = Tween(begin: 1.0,end:1.0).animate(_controller);
 

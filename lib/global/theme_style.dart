@@ -10,6 +10,7 @@ class ThemeStyle {
   //颜色
   static final String primarySwatch="#021252";
   static final Color iconButton= Colors.yellow;
+  static final Color iconLoading= Colors.yellow;
 
   static const Color text_dark = Color(0xFF333333);
   static const Color text_normal = Color(0xFF666666);

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 // import 'package:flutter_pipixia/components/search_bar.dart';
 import '../components/smart_drawer.dart';
 import 'package:flutter_pipixia/global/theme_style.dart';
+import '../global/util_loading.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key); 
@@ -153,7 +154,21 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       // body: SearchBarDemo()
       //内容主体
-      body: Center(  ),
+      body: Column(
+        children: <Widget>[
+          RaisedButton(
+            onPressed: (){ 
+                LoadingView.show( 
+                  context: context,
+                  message: '我是小妖怪，逍遥又自在，杀人不眨眼，吃人不撒盐',
+                  backgroundColor:Colors.red
+                );
+
+            },
+            child: Text('显示加载动画'),
+          ),
+        ],
+      ),
       // floatingActionButton: FloatingActionButton(
       //   onPressed: _incrementCounter,
       //   tooltip: 'Increment',

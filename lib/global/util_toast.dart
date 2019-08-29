@@ -55,10 +55,15 @@ class ToastView {
     //两秒后，移除Toast
     Future.delayed(Duration(seconds: 2)).then((value) {
       controllerHide.forward();
+      //
+      controllerShowAnim.dispose();
+      controllerShowOffset.dispose();
+      controllerHide.dispose();
       Future.delayed(Duration(milliseconds: 250)).then((value) {
         //移除
         overlayEntry.remove();
         overlayState=null;
+
       });
     });
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_pipixia/components/splash_screen.dart';
 // import 'package:flutter_screenutil/flutter_screenutil.dart'; 
 import 'package:catcher/catcher_plugin.dart';
@@ -18,7 +19,8 @@ void main() {
   // CatcherOptions releaseOptions = CatcherOptions(DialogReportMode(), [
   //   EmailManualHandler(["625672881@qq.com"])
   // ]);
-
+  // debugPaintSizeEnabled = true; 
+  
   Catcher(MyApp(), debugConfig: debugOptions);
 
   // runApp(MyApp());

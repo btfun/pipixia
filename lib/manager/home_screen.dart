@@ -14,6 +14,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) { 
@@ -30,12 +31,37 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
       ),
-       
+      key: _scaffoldKey,
       //侧边栏
       drawer: SmartDrawer(
         widthPercent: 0.8,
-        child: Scaffold(
-          body:  Column(
+        child: _smartDrawer()//
+      ),
+      //内容主体
+      body: Column(
+        children: <Widget>[
+          RaisedButton(
+            onPressed: (){ 
+               _scaffoldKey.currentState.openDrawer();
+
+              LoadingView.show( context: context );
+              Future.delayed(Duration(seconds: 2)).then((value) {
+                LoadingView.hide();
+              });
+
+            },
+            child: Text('显示加载动画'),
+          ),
+        ],
+      ), 
+    );
+  }
+
+  // 
+  Widget _smartDrawer(){
+    return Scaffold(
+          body:  ListView(
+          padding: EdgeInsets.zero,//去除顶部灰边
           children: <Widget>[
                 
                   UserAccountsDrawerHeader(
@@ -66,59 +92,110 @@ class _MyHomePageState extends State<MyHomePage> {
                     margin: EdgeInsets.zero,
                 ),
                 Container(
+                  height: 60.0,
+                  child: Row(
+                      children: <Widget>[
+                        Expanded(
+                           child:  IconButton(
+                              icon:Icon(Icons.email),
+                              color: ThemeStyle.iconButton,
+                              onPressed: ()=>{},
+                            ),  
+                        ),
+                        Expanded( 
+                           child:  IconButton(
+                              icon:Icon(Icons.perm_contact_calendar),
+                              color: ThemeStyle.iconButton,
+                              onPressed: ()=>{},
+                            ),  
+                        ),
+                        Expanded(
+                          child:  IconButton(
+                              icon:Icon(Icons.school),
+                              color: ThemeStyle.iconButton,
+                              onPressed: ()=>{},
+                            ),  
+                        ),
+                        Expanded(
+                          child:  IconButton(
+                              icon:Icon(Icons.notifications),
+                              color: ThemeStyle.iconButton,
+                              onPressed: ()=>{},
+                            ), 
+                        ),
+                      ],
+                  ),
+                ),
+                Container(
                   height: 300.0,
                   decoration: BoxDecoration(
                         color: Color(0xFFf0f0f0)
                    ),
-                  child:  ListView(
-                    children: <Widget>[
-                      ListTile(
-                          title:  Text('小猫钓鱼店'),
-                          trailing: Icon(Icons.arrow_right),
-                          onTap: () {
-                              Future.delayed(Duration(milliseconds: 100)).then((value) {
-                                  Navigator.pop(context); // 关闭侧边栏
-                              });
-                            }
+                  child: ListView(
+                        children: <Widget>[
+                          ListTile(
+                              title:  Text('小猫钓鱼店'),
+                              trailing: Icon(Icons.arrow_right),
+                              leading:  CircleAvatar(backgroundImage: AssetImage("images/pipixia.png") ),
+                              onTap: () {
+                                  Future.delayed(Duration(milliseconds: 100)).then((value) {
+                                      Navigator.pop(context); // 关闭侧边栏
+                                  });
+                                }
+                          ),
+                          ListTile(
+                              title:  Text('早起虫儿有鸟吃店'),
+                              trailing: Icon(Icons.arrow_right),
+                              leading:  CircleAvatar(backgroundImage: AssetImage("images/pipixia.png") ),
+                              onTap: () {
+                                  Future.delayed(Duration(milliseconds: 100)).then((value) {
+                                      Navigator.pop(context); // 关闭侧边栏
+                                  });
+                                }
+                          ),
+                          ListTile(
+                              title:  Text('天天睡懒觉店'), 
+                              trailing: Icon(Icons.arrow_right),
+                              leading:  CircleAvatar(backgroundImage: AssetImage("images/pipixia.png") ),
+                              onTap: () {
+                                  Future.delayed(Duration(milliseconds: 100)).then((value) {
+                                      Navigator.pop(context); // 关闭侧边栏
+                                  });
+                                }
+                          ),
+                          ListTile(
+                              title:  Text('小猫钓鱼店'),
+                              trailing: Icon(Icons.arrow_right),
+                              leading:  CircleAvatar(backgroundImage: AssetImage("images/pipixia.png") ),
+                              onTap: () {
+                                  Future.delayed(Duration(milliseconds: 100)).then((value) {
+                                      Navigator.pop(context); // 关闭侧边栏
+                                  });
+                                }
+                          ),
+                          ListTile(
+                              title:  Text('早起虫儿有鸟吃店'),
+                              trailing: Icon(Icons.arrow_right),
+                              leading:  CircleAvatar(backgroundImage: AssetImage("images/pipixia.png") ),
+                              onTap: () {
+                                  Future.delayed(Duration(milliseconds: 100)).then((value) {
+                                      Navigator.pop(context); // 关闭侧边栏
+                                  });
+                                }
+                          ),
+                          ListTile(
+                              title:  Text('天天睡懒觉店'), 
+                              trailing: Icon(Icons.arrow_right),
+                              leading:  CircleAvatar(backgroundImage: AssetImage("images/pipixia.png") ),
+                              onTap: () {
+                                  Future.delayed(Duration(milliseconds: 100)).then((value) {
+                                      Navigator.pop(context); // 关闭侧边栏
+                                  });
+                                }
+                          ),
+                        ],
                       ),
-                      ListTile(
-                          title:  Text('早起虫儿有鸟吃店'),
-                          trailing: Icon(Icons.arrow_right),
-                          onTap: () {
-                              Future.delayed(Duration(milliseconds: 100)).then((value) {
-                                  Navigator.pop(context); // 关闭侧边栏
-                              });
-                            }
-                      ),
-                      ListTile(
-                          title:  Text('天天睡懒觉店'), 
-                          trailing: Icon(Icons.arrow_right),
-                          onTap: () {
-                              Future.delayed(Duration(milliseconds: 100)).then((value) {
-                                  Navigator.pop(context); // 关闭侧边栏
-                              });
-                            }
-                      ),
-                       ListTile(
-                          title:  Text('早起虫儿有鸟吃店'),
-                          trailing: Icon(Icons.arrow_right),
-                          onTap: () {
-                              Future.delayed(Duration(milliseconds: 100)).then((value) {
-                                  Navigator.pop(context); // 关闭侧边栏
-                              });
-                            }
-                      ),
-                      ListTile(
-                          title:  Text('天天睡懒觉店'), 
-                          trailing: Icon(Icons.arrow_right),
-                          onTap: () {
-                              Future.delayed(Duration(milliseconds: 100)).then((value) {
-                                  Navigator.pop(context); // 关闭侧边栏
-                              });
-                            }
-                      ),
-                    ],
-                  ),
+                   
                 ),
                
                 Column(
@@ -149,31 +226,8 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
         
-        ),
-       
-      ),
-      // body: SearchBarDemo()
-      //内容主体
-      body: Column(
-        children: <Widget>[
-          RaisedButton(
-            onPressed: (){ 
-                LoadingView.show( 
-                  context: context,
-                  message: '我是小妖怪，逍遥又自在，杀人不眨眼，吃人不撒盐',
-                  backgroundColor:Colors.red
-                );
+        );
 
-            },
-            child: Text('显示加载动画'),
-          ),
-        ],
-      ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: _incrementCounter,
-      //   tooltip: 'Increment',
-      //   child: Icon(Icons.add),
-      // ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
   }
+
 }

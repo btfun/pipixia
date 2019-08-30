@@ -16,13 +16,13 @@ class LoadingView {
 
   static void show({
         @required BuildContext context,        //组件上下文
-        @required String message,              //信息文字
+        String message,                        //信息文字
         Color backgroundColor=Colors.redAccent,//信息底色
         Color textColor=Colors.white,          //文字颜色
-        double fontSize
       }) {
+
     //
-	   overlayState = Overlay.of(context);
+	  overlayState = Overlay.of(context);
     var winSize = MediaQuery.of(context).size;//获取屏幕尺寸
     var cwidth= winSize.width * 0.15;
     var owidth= 30.0;
@@ -60,37 +60,38 @@ class LoadingView {
                           builder: (context, child) {
                             //CustomPaint 画笔
                             return CustomPaint(
-                              painter: LoadingIcon(cwidth , _controller), 
-                              // foregroundPainter: LoadingIcon(cwidth - 20.0, _controller), 
+                              painter: LoadingIcon(cwidth , _controller)
                             );
                   }),
                   margin:  EdgeInsets.all(owidth/2),  // margin 必须为外部容器额外宽度 owidth的一半,否则不居中
                 ),
-                
               )
-             
             ) 
           ),
         )
       );
       
     });
+
     //往Overlay中插入插入OverlayEntry
     overlayState.insert(overlayEntry); 
 
     //8秒后计算超时自动移除
     Future.delayed(Duration(seconds: 8)).then((value) {
       //移除
-        overlayEntry.remove();
-        overlayState=null;
+        if(overlayEntry!=null){
+          overlayEntry.remove(); 
+        }
     });
 
   }
 
-  static void hide(){
+  static void hide(){ 
     //手动移除
-    overlayEntry.remove();
-    overlayState=null;
+    if(overlayEntry!=null){
+        overlayEntry.remove(); 
+    }
+    overlayEntry=null; 
   }
       
 }
